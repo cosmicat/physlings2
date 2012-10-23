@@ -1,0 +1,8 @@
+C:\Users\facerace\kitchen\faucet\unityfaucet\physlings2\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\facerace\kitchen\faucet\unityfaucet\physlings2\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\facerace\kitchen\faucet\unityfaucet\physlings2\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\facerace\kitchen\faucet\unityfaucet\physlings2\Temp\bin\Debug\UnityEditor.dll
+C:\Users\facerace\kitchen\faucet\unityfaucet\physlings2\Temp\bin\Debug\UnityEngine.dll
+C:\Users\facerace\kitchen\faucet\unityfaucet\physlings2\Temp\bin\Debug\nunit.framework.dll
+C:\Users\facerace\kitchen\faucet\unityfaucet\physlings2\obj\Debug\Assembly-CSharp.dll
+C:\Users\facerace\kitchen\faucet\unityfaucet\physlings2\obj\Debug\Assembly-CSharp.pdb
