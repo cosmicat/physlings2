@@ -2,27 +2,40 @@ using UnityEngine;
 using System.Collections;
 
 public class Cannon : MonoBehaviour {
-    float BombDelay = 1;
-    float nextBomb = 0;
+    const float BOMB_INTERVAL = 1;
+    float nextBomb;
+    bool paused;
 
     public GameObject bombPrefab;
 
 	// Use this for initialization
 	void Start () {
-	
-	}
+        nextBomb = 0;
+        paused = false;
+
+        SphereCollider collider = gameObject.AddComponent<SphereCollider>();
+        collider.isTrigger = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        nextBomb -= Time.deltaTime;
+        if (!paused)
+        {
+            nextBomb -= Time.deltaTime;
+        }
 
         if (nextBomb < 0)
         {
             LaunchBomb();
 
-            nextBomb = BombDelay;
+            nextBomb = BOMB_INTERVAL;
         }
 	}
+
+    void OnMouseUpAsButton()
+    {
+        paused = !paused;
+    }
 
     void LaunchBomb()
     {
