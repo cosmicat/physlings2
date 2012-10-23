@@ -32,5 +32,6 @@ public class Cannon : MonoBehaviour {
 
         bomb.AddComponent<Rigidbody>();
         bomb.rigidbody.AddForce(transform.up * 12.2f, ForceMode.Impulse);
+        bomb.AddComponent<SetPhysicsTo2d>();
     }
 }
