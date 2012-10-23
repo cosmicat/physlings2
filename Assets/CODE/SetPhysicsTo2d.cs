@@ -1,10 +1,20 @@
 using UnityEngine;
-using System.Collections;
+
+using System;
 
 public class SetPhysicsTo2d : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    void Start()
+    {
         rigidbody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-	}
+    }
+
+    void Update()
+    {
+        // destroy objects which have gone siginificantly out of bounds
+        if (Math.Abs(transform.position.y) > 100 || Math.Abs(transform.position.x) > 100)
+        {
+            GameObject.Destroy(gameObject);
+        }
+    }
 }
