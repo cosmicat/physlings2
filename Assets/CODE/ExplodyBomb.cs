@@ -1,31 +1,21 @@
 using UnityEngine;
-using System.Collections;
 
 public class ExplodyBomb : MonoBehaviour {
-    float lifetime;
+    public float Lifetime = 1;
     
-    // Use this for initialization
-	void Start () {
-        //lifetime = (float)Random.Range(1.5f, 5);
-        lifetime = (float)Random.Range(6,6);
-	}
-	
-	// Update is called once per frame
 	void Update () {
-        
-        lifetime -= Time.deltaTime;
+        Lifetime -= Time.deltaTime;
 
-        if (lifetime < 0)
+        if (Lifetime < 0)
         {
-           // Explode();
+           Explode();
         }
 	}
 
     void Explode()
     {
         
-        RaycastHit[] rh = Physics.CapsuleCastAll(transform.position, transform.position, 10, Vector3.up);
-        Debug.Log(rh.Length);
+        RaycastHit[] rh = Physics.CapsuleCastAll(transform.position, transform.position, 5, Vector3.up);
         foreach (RaycastHit e in rh)
         {
             
