@@ -1,23 +1,13 @@
 using UnityEngine;
 using System.Collections;
-//TODO
-//-write a script to 
+
+
 public class SuperBounce : MonoBehaviour {
-    public float bouncyness = 0.5f;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public float Bounciness = 1f;
 
     void OnCollisionEnter(Collision c)
     {
-        //c.rigidbody.AddForce(Vector3.Reflect(-c.rigidbody.velocity.normalized, c.contacts[0].normal)*10, ForceMode.Impulse);
-        
-        c.rigidbody.AddForce(transform.up * c.impactForceSum.magnitude * bouncyness, ForceMode.Impulse);
+        // the physics engine calculates bounce after this, so only hadd half of what's needed
+        c.rigidbody.velocity += Vector3.Project(c.rigidbody.velocity, transform.up) * (Bounciness - 1) / 2;
     }
 }
