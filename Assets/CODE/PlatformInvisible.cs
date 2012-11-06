@@ -8,6 +8,7 @@ public class PlatformInvisible : MonoBehaviour {
         if (collider != null)
         {
             collider.enabled = false;
+            renderer.enabled = false;
         }
     }
 
@@ -16,6 +17,7 @@ public class PlatformInvisible : MonoBehaviour {
         if (collider != null)
         {
             collider.enabled = true;
+            renderer.enabled = true;
         }
     }
 }
