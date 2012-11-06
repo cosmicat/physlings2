@@ -15,12 +15,14 @@ public class PlatformMovable : MonoBehaviour
 
     void OnMouseDown()
     {
+        collider.enabled = false;
         moving = true;
         getDeltaPosition();
     }
 
     void OnMouseUp()
     {
+        collider.enabled = true;
         moving = false;
     }
 
