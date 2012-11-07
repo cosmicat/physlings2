@@ -1,0 +1,116 @@
+::DESIGN::
+
+::EVENT::
+-all non physical interactions in the game are described as events. 
+-an event consists of a trigger and an action stack
+
+
+::TRIGGERS::
+-triggers actions
+-may have parameters
+	-e.g. contact trigger, takes a TARGET of type ball or platform as a parameter
+	-e.g. timer trigger, takes repeat (int) and time (float) as a parameter
+-may have conditionals
+
+::CONDITIONALS::
+-????
+:VALUES:
+-number of balls on screen
+-time elapsed
+-etc???
+:OPERATORS:
+->,<,==,&&,||,etc...
+-bool function(arg1,arg2,...)
+
+::TARGETS:
+:WHERE:
+-global
+	-all balls
+	-oldest/newest ball
+-produced by triggers	
+	-e.g. contact produces a ball as a target
+-inputs to triggers
+	-e.g. a platform on a contact trigger
+-produced by actions
+	-e.g. duplicate produces a ball target
+
+
+:TYPES:
+-ball
+-platform
+-event
+
+:TARGET STACK:
+-this system might be too limited but it's elegant.
+-targets are pushed and popped off (or peeked from) the target stack
+-this entirely determines which targets are used by the event
+-e.g. if a platform bounce triggers a teleport event then
+	-platform A (source) and platform B (target) are pushed onto the event's target stack
+	-ball bounces on A and is pushed onto the stack
+	-teleport action pops ball off the stack and peeks at platform B and teleports ball to paltform B
+:OTHER TARGET RULES: (more complicated than target stack)
+-null
+-input target[index]
+-trigger created target[index]
+-action created target[index]
+-last action created target
+-first action created target
+-etc
+-every rule has a fallback rule (which can have its own fallback)
+
+
+::PROPERTIES::
+:BALL:
+-bounciness (need to decide how bounce combines with platforms)
+-mass
+-force/velocity
+-position
+-ignore gravity
+:PLATFORM:
+-bounciness
+-friction
+-position
+-orientation
+:EVENT:
+-actions
+	-power
+	-count
+	-time
+:GLOBAL PROPERTIES:
+-gravity
+
+::ACTIONS::
+-may have conditionals (action does not trigger if condition is not met)
+:STACK:
+-actions come in a stack and each action gets triggered in order and may effect the next action (e.g. via the target stack)
+:EXAMPLES:
+-ball actions
+	-extra bounce (amount)
+	-teleport (location (could be anything TARGET with position property), orientation)
+	-change ball property (property, change)
+		-make bouncy/not bouncy
+		-make high friction
+	-duplicate (count) (outputs target)
+	-destroy
+-platform actions
+	-switch on/off
+	-change/swap action
+	-change property (property, change)
+		-change rotation
+		-move
+-global actions
+	-move stage element (element, position)
+	-change gravity
+	-destroy all balls (this is actually described by the destroy action and the all balls target)
+-other
+	-store object (is put on top of target stack)
+
+
+	
+::QUESTIONS::
+-visual encoding of the above information 
+-parameters need to be able to take TARGET properties 
+	-e.g. teleport takes position which will almost certainly be a ball or platform's position
+	-e.g. mapping target'sq (if ball) force to some other value type of an action
+-the idea of targets could be more generalized
+	-for example, maybe it could be even more reduced, say teleport takes any position reference as a target (could be ball position, target position, static element position) 
