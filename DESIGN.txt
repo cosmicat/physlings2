@@ -1,82 +1,56 @@
 ::DESIGN::
 
-::EVENT::
--all non physical interactions in the game are described as events. 
--an event consists of a trigger and an action stack
-
 ::TRIGGERS::
--triggers actions
+-when conditions are met, causes action to happen
 -may have parameters
 	-e.g. contact trigger, takes a TARGET of type ball or platform as a parameter
 	-e.g. timer trigger, takes repeat (int) and time (float) as a parameter
--may have conditionals
- 
-::CONDITIONALS::
--????
-:VALUES:
--number of balls on screen
--time elapsed
--etc???
-:OPERATORS:
-->,<,==,&&,||,etc...
--bool function(arg1,arg2,...)
+-has an action stack
+	
+::CONDITIONAL::
+-delegate that returns true or false
+
+::LIST OF PROPERTIES::
+-TODO
+
+
 
 ::TARGETS:
-:WHERE:
--global
-	-all balls
-	-oldest/newest ball
--produced by triggers	
-	-e.g. contact produces a ball as a target
--inputs to triggers
-	-e.g. a platform on a contact trigger
--produced by actions
-	-e.g. duplicate produces a ball target
+-defines an interface of getters and setters on properties above
+	-getter returns null if property does not exist
+	-setter returns false if property does not exist
+	
+-where to get targets
+	-global
+		-all balls
+		-oldest/newest ball
+	-produced by triggers	
+		-e.g. contact produces a ball as a target
+	-inputs to triggers
+		-e.g. a platform on a contact trigger
+	-produced by actions
+		-e.g. duplicate produces a ball target
+	-manually specified
 
+-examples
+	-ball
+		-bounciness (need to decide how bounce combines with platforms)
+		-mass
+		-force/velocity
+		-position
+		-ignore gravity
+		-assosciated bounce trigger
+	-platform
+		-bounciness (combine is always average, so ball bounciness can override platform bounciness but not the other way around) 
+		-friction
+		-position
+		-orientation
+		-assosciated bounce trigger
 
-:TYPES:
--ball
--platform
--event
-
-:TARGET STACK:
--this system might be too limited but it's elegant.
--targets are pushed and popped off (or peeked from) the target stack
--this entirely determines which targets are used by the event
--e.g. if a platform bounce triggers a teleport event then
-	-platform A (source) and platform B (target) are pushed onto the event's target stack
-	-ball bounces on A and is pushed onto the stack
-	-teleport action pops ball off the stack and peeks at platform B and teleports ball to paltform B
-:OTHER TARGET RULES: (more complicated than target stack)
--null
--input target[index]
--trigger created target[index]
--action created target[index]
--last action created target
--first action created target
--etc
--every rule has a fallback rule (which can have its own fallback)
-
-
-::PROPERTIES::
-:BALL:
--bounciness (need to decide how bounce combines with platforms)
--mass
--force/velocity
--position
--ignore gravity
-:PLATFORM:
--bounciness (combine is always average, so ball bounciness can override platform bounciness but not the other way around) 
--friction
--position
--orientation
-:EVENT:
--actions
-	-power
-	-count
-	-time
-:GLOBAL PROPERTIES:
--gravity
+::GLOBAL PROPERTIES::
+-gravity (get, set)
+-number of balls (get)
+-game time (get)
 
 ::ACTIONS::
 -may have conditionals (action does not trigger if condition is not met)
@@ -106,12 +80,6 @@
 -other
 	-store object (is put on top of target stack)
 
-
 	
 ::QUESTIONS::
 -visual encoding of the above information 
--parameters need to be able to take TARGET properties 
-	-e.g. teleport takes position which will almost certainly be a ball or platform's position
-	-e.g. mapping target'sq (if ball) force to some other value type of an action
--the idea of targets could be more generalized
-	-for example, maybe it could be even more reduced, say teleport takes any position reference as a target (could be ball position, target position, static element position) 
