@@ -4,14 +4,13 @@
 -all non physical interactions in the game are described as events. 
 -an event consists of a trigger and an action stack
 
-
 ::TRIGGERS::
 -triggers actions
 -may have parameters
 	-e.g. contact trigger, takes a TARGET of type ball or platform as a parameter
 	-e.g. timer trigger, takes repeat (int) and time (float) as a parameter
 -may have conditionals
-
+ 
 ::CONDITIONALS::
 -????
 :VALUES:
@@ -67,7 +66,7 @@
 -position
 -ignore gravity
 :PLATFORM:
--bounciness
+-bounciness (combine is always average, so ball bounciness can override platform bounciness but not the other way around) 
 -friction
 -position
 -orientation
@@ -88,7 +87,8 @@
 	-extra bounce (amount)
 	-teleport (location (could be anything TARGET with position property), orientation)
 	-change ball property (property, change)
-		-make bouncy/not bouncy
+		-make bouncy/not bouncy (bounce = 1, combine = max), (bounce = 0, combine = min)
+		-make more/less bourcy (bounce = 1/0, combine = avg)
 		-make high friction
 	-duplicate (count) (outputs target)
 	-destroy
@@ -98,6 +98,7 @@
 	-change property (property, change)
 		-change rotation
 		-move
+		-bounciness (bounce = value, combine = avg)
 -global actions
 	-move stage element (element, position)
 	-change gravity
