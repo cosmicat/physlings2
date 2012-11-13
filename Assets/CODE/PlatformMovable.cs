@@ -46,7 +46,6 @@ public class PlatformMovable : MonoBehaviour
 
             if (Math.Abs(distance) > (box.size.x * box.transform.localScale.x / 4))
             {
-                Debug.Log((((BoxCollider)collider).size.x / 4) + " " + distance);
                 if (distance > 0)
                 {
                     rotating = RotationDirection.CLOCKWISE;
