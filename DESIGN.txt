@@ -1,3 +1,21 @@
+::IMPLEMENTATION NOTES::
+:LEVEL EDITING:
+-TargetBehaviour : MonoBehaviour
+	-registers target in TargetManager
+	-onCollision(){TargetManager.collision(target, other info)}
+-TriggerActionBehaviourInterface
+	-int order()
+	-creates trigger/actions on assosciated TargetBehavio(u)r
+-trigger has 
+:ACTION LINE:
+-trigger has primary target and output action
+	-e.g. bounce trigger puts ball on output and primary is platform itself
+	-actions may override whats in output action
+	-actions have access to next action/s in stack and may call it as many/few times as it wants.
+:TARGETMANAGER:
+-has Target list
+	-target object has assoscitaed triggers and game objects
+
 ::DESIGN::
 
 ::TRIGGERS::
